@@ -397,8 +397,8 @@ class MovieWriter(AbstractMovieWriter):
         out, err = self._proc.communicate()
         self._frame_sink().close()
         # Use the encoding/errors that universal_newlines would use.
-        out = TextIOWrapper(BytesIO(out)).read()
-        err = TextIOWrapper(BytesIO(err)).read()
+        out = TextIOWrapper(BytesIO(out.encode())).read()
+        err = TextIOWrapper(BytesIO(err.encode())).read()
         if out:
             _log.log(
                 logging.WARNING if self._proc.returncode else logging.DEBUG,
